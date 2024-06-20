@@ -1,3 +1,26 @@
+const searchBar = document.getElementById('searchBar')
+const searchInput = searchBar.querySelector('input[type="text"]')
+const searchButton = searchBar.querySelector('button')
+const resultsSection = document.getElementById('hidden')
+const resultSpan = document.querySelector('h2 span')
+
+//User interface events handler
+
+const searchSubmitHandler = (event) => {
+    event.preventDefault()
+    //call api here to find results related to a movie
+    if (!searchInput.value.trim()) {
+        resultsSection.style.display = 'none'
+        return
+    } else {
+        resultsSection.style.display = 'flex'
+    }
+    resultSpan.textContent = searchInput.value
+    searchInput.value = ''
+
+    //if results existes display block the results section
+}
+
 //Swiper events handler
 
 const swiperOnInit = function (event) {
@@ -48,7 +71,7 @@ function SwiperFactory(containerClass, buttonsClass) {
     })
     return swiper
 }
-
+searchButton.addEventListener('click', searchSubmitHandler)
 const swiper1 = SwiperFactory('.swiper1', '1')
 const swiper2 = SwiperFactory('.swiper2', '2')
 const swiper3 = SwiperFactory('.swiper3', '3')

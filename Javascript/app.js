@@ -5,16 +5,18 @@ const resultsSection = document.getElementById('hidden')
 const resultSpan = document.querySelector('h2 span')
 const resultsImages = document.querySelectorAll('.resultimages')
 
+resultsSection.style.display = 'none'
 //User interface events handler
 
 const searchSubmitHandler = (event) => {
     event.preventDefault()
     //call api here to find results related to a movie
-    resultFetchData()
+
     if (!searchInput.value.trim()) {
         resultsSection.style.display = 'none'
         return
     } else {
+        resultFetchData(searchInput.value)
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = searchInput.value
@@ -25,13 +27,9 @@ const searchSubmitHandler = (event) => {
 
 //Swiper events handler
 
-const navigationNextHandler = function (swiper) {
-    console.log(swiper.el)
-}
+const navigationNextHandler = function (swiper) {}
 
-const navigationPrevHandler = function (swiper) {
-    console.log(swiper.el)
-}
+const navigationPrevHandler = function (swiper) {}
 
 const swiperOnInit = function (event) {
     if (event.el.classList.contains('swiper1')) {
@@ -83,8 +81,35 @@ function SwiperFactory(containerClass, buttonsClass) {
     })
     return swiper
 }
+
+function updateResultImage(response) {
+    resultsImages.forEach((image, index) => {
+        image.setAttribute(
+            'src',
+            `https://image.tmdb.org/t/p/original/${response.results[index].poster_path}`
+        )
+    })
+}
 //Call Api handler
-function resultFetchData(url) {}
+function resultFetchData(searchValue) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization:
+                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTBjOTI1NzdhYjUyZTUxNThmYWU0MGYxMDdkMzBjOCIsInN1YiI6IjY2NzE5MzgzZTA3ZmFmZjAzNTcyZWZhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ztStLJqy8UtW95RrD6ie8sIpBORWWgbdk32o9Zxx9HQ',
+        },
+    }
+
+    fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`,
+        options
+    )
+        .then((response) => response.json())
+        .then((response) => updateResultImage(response))
+        .catch((err) => console.error(err))
+}
+
 //Main Code
 searchButton.addEventListener('click', searchSubmitHandler)
 const swiper1 = SwiperFactory('.swiper1', '1')

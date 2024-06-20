@@ -3,12 +3,14 @@ const searchInput = searchBar.querySelector('input[type="text"]')
 const searchButton = searchBar.querySelector('button')
 const resultsSection = document.getElementById('hidden')
 const resultSpan = document.querySelector('h2 span')
+const resultsImages = document.querySelectorAll('.resultimages')
 
 //User interface events handler
 
 const searchSubmitHandler = (event) => {
     event.preventDefault()
     //call api here to find results related to a movie
+    resultFetchData()
     if (!searchInput.value.trim()) {
         resultsSection.style.display = 'none'
         return
@@ -22,6 +24,14 @@ const searchSubmitHandler = (event) => {
 }
 
 //Swiper events handler
+
+const navigationNextHandler = function (swiper) {
+    console.log(swiper.el)
+}
+
+const navigationPrevHandler = function (swiper) {
+    console.log(swiper.el)
+}
 
 const swiperOnInit = function (event) {
     if (event.el.classList.contains('swiper1')) {
@@ -67,10 +77,15 @@ function SwiperFactory(containerClass, buttonsClass) {
 
         on: {
             init: swiperOnInit,
+            navigationNext: navigationNextHandler,
+            navigationPrev: navigationPrevHandler,
         },
     })
     return swiper
 }
+//Call Api handler
+function resultFetchData(url) {}
+//Main Code
 searchButton.addEventListener('click', searchSubmitHandler)
 const swiper1 = SwiperFactory('.swiper1', '1')
 const swiper2 = SwiperFactory('.swiper2', '2')

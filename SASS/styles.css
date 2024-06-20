@@ -1,0 +1,480 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@100..900&display=swap");
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --swiper-navigation-sides-offset: -5%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  background-color: #141517;
+}
+header div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+header div h1 {
+  color: #FFF;
+  text-transform: uppercase;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  padding-top: 26px;
+  padding-bottom: 31px;
+  padding-left: 180px;
+}
+header div h1 span {
+  color: #CC0000;
+}
+header div ul {
+  display: flex;
+  flex-direction: row;
+  gap: 29px;
+  padding-right: 180px;
+}
+header div ul a {
+  color: #FFF;
+  text-transform: uppercase;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  letter-spacing: 3%;
+}
+header div ul a:hover {
+  color: #CC0000;
+}
+
+body {
+  background-color: #191B20;
+}
+body main {
+  text-align: center;
+}
+body main .modal {
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  position: fixed;
+  z-index: 11;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+body main .modal img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 11px;
+  margin-left: 11px;
+}
+body main .modal .signupBox {
+  margin: 5% auto;
+  height: 608px;
+  width: 410px;
+  padding: 61px;
+  background-color: black;
+  position: relative;
+  text-align: left;
+}
+body main .modal .signupBox .input-flex {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 25px;
+  margin-bottom: 22px;
+}
+body main .modal .signupBox .input-flex .btnWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 29px;
+  height: 54px;
+}
+body main .modal .signupBox .input-flex .btnWrapper .left, body main .modal .signupBox .input-flex .btnWrapper .right {
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+  color: #FFF;
+  text-transform: uppercase;
+}
+body main .modal .signupBox .input-flex .btnWrapper .left {
+  border-top: solid 1px #FFF;
+  border-bottom: solid 1px #FFF;
+  border-left: solid 1px #FFF;
+  padding: 11px 26px 14px 32px;
+  border-radius: 8px 0px 0px 8px;
+}
+body main .modal .signupBox .input-flex .btnWrapper .right {
+  border-top: solid 1px #FFF;
+  border-bottom: solid 1px #FFF;
+  border-right: solid 1px #FFF;
+  padding: 11px 45px 14px 32px;
+  border-radius: 0px 8px 8px 0px;
+}
+body main .modal .signupBox .input-flex .btnWrapper .toggle {
+  background-color: #CC0000;
+  border: none;
+}
+body main .modal .signupBox .input-flex input {
+  margin: 0 auto;
+  padding: 12.4px 0px 12.4px 20px;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+}
+body main .modal .signupBox #checkbox {
+  margin-bottom: 46px;
+}
+body main .modal .signupBox label {
+  display: inline;
+  padding-left: 9px;
+  color: #FFF;
+  font-family: "Inter", sans-serif;
+}
+body main .modal .signupBox button {
+  background-color: #CC0000;
+  display: block;
+  border: none;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  color: #FFF;
+  text-transform: uppercase;
+  padding: 11px 115px 12px 115px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+body main .modal .signupBox #forgotLink {
+  display: block;
+  color: #CC0000;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.21rem;
+  margin-bottom: 19px;
+}
+body main .modal .signupBox p {
+  color: #FFF;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.21rem;
+}
+body main .modal .signupBox p span a {
+  color: #CC0000;
+}
+body main .searchBar {
+  font-size: 0;
+  padding-bottom: 71px;
+}
+body main .searchBar input {
+  color: black;
+  font-size: 1rem;
+  line-height: 19px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  padding: 13.6px 0px 11.4px 18px;
+  border-radius: 8px 0px 0px 8px;
+  border: none;
+  margin-top: 73px;
+  margin-bottom: 61px;
+}
+body main .searchBar button {
+  height: 44px;
+  width: 44px;
+  background-color: #CC0000;
+  border: none;
+  border-radius: 0px 8px 8px 0px;
+}
+body main section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+}
+body main section .container {
+  width: 70vw;
+  --div-width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 95px;
+}
+body main section .container h2 {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.21rem;
+  color: #FFF;
+}
+body main section .container .swiper-container {
+  max-width: 66vw;
+  position: relative;
+}
+body main section .container .swiper-container .swiper1, body main section .container .swiper-container .swiper2, body main section .container .swiper-container .swiper3 {
+  overflow: hidden;
+}
+body main section .container .swiper-container .swiper-slide {
+  height: auto;
+  position: relative;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard {
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 0.5s ease;
+  opacity: 0;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard .cardContent {
+  padding: 76px 38px 38px 38px;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard .cardContent h2 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  color: #FFF;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard .cardContent h4 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  color: #B0B0B0;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard .cardContent p {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 16.49px;
+  color: #FFF;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard .cardContent h3 {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  color: #CC0000;
+}
+body main section .container .swiper-container .swiper-slide .overlayCard:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+body main section .container .swiper-container .swiper-slide img {
+  height: 100%;
+}
+body main section .container .swiper-container .swiper-button-next::after, body main section .container .swiper-container .swiper-button-prev::after {
+  display: none;
+}
+body main section .container .genreMenu {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+body main section .container .genreMenu h2 {
+  margin-bottom: 46px;
+}
+body main section .container .genreMenu ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  max-width: calc(var(--div-width) * 2.2 / 3);
+}
+body main section .container .genreMenu ul li {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.21rem;
+  color: #FFF;
+  padding: 7px 10px;
+}
+body main section .container .genreMenu ul .selectedGenre {
+  background-color: #CC0000;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+body main section .container .genreMenu .line {
+  border: solid 1px white;
+  margin-bottom: 29px;
+  max-width: calc(var(--div-width) * 2.2 / 3);
+}
+body main .genreSection {
+  margin-bottom: 14px;
+}
+
+.overlay {
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  position: fixed;
+  z-index: 11;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popupMovie {
+  background-color: #000;
+  padding: 74px 79px;
+  margin: 5% auto;
+  max-width: 742px;
+  position: relative;
+}
+.popupMovie #crossBtn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 11px;
+  margin-left: 11px;
+}
+.popupMovie .popupMovie-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 52px;
+}
+.popupMovie .popupMovie-flex img {
+  max-width: 234px;
+  border: solid 1px white;
+}
+.popupMovie .popupMovie-flex div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: left;
+}
+.popupMovie .popupMovie-flex div h3 {
+  color: #CC0000;
+  text-transform: uppercase;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+.popupMovie .popupMovie-flex div h3 #star {
+  border: none;
+  margin-right: 5px;
+}
+.popupMovie .popupMovie-flex div h4 {
+  color: #FFF;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.05rem;
+  margin-bottom: 11px;
+}
+.popupMovie .popupMovie-flex div .score {
+  font-family: "Inter", sans-serif;
+  margin-bottom: 12px;
+}
+.popupMovie .popupMovie-flex div h5 {
+  color: #FFF;
+  font-family: "Inria Sans", sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.05rem;
+  margin-bottom: 13px;
+}
+.popupMovie .popupMovie-flex div p {
+  font-family: "Inria Sans", sans-serif;
+  color: #FFF;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 10px;
+}
+.popupMovie .popupMovie-flex div p span {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-right: 5px;
+}
+
+footer {
+  background-color: #141517;
+}
+footer .foot-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 180px;
+  padding-right: 180px;
+}
+footer .foot-container h1 {
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.6975rem;
+  color: #CC0000;
+  text-transform: uppercase;
+  padding-top: 71px;
+  padding-bottom: 72px;
+}
+footer .foot-container h1 span {
+  color: #FFF;
+}
+footer .foot-container ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 29px;
+}
+footer .foot-container ul a {
+  font-family: "Inria Sans", sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.0494rem;
+  color: #FFF;
+}
+footer .foot-container ul a:hover {
+  color: #CC0000;
+}
+footer .foot-container p {
+  color: #B8B8B8;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16.79px;
+}/*# sourceMappingURL=styles.css.map */

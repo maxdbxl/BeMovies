@@ -1,0 +1,48 @@
+footer {
+    background-color: $black;
+    .foot-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 180px;
+        padding-right: 180px;
+        h1 {
+            font-family: $menu-font;
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 2.6975rem;
+            color: $red;
+            text-transform: uppercase;
+            padding-top: 71px;
+            padding-bottom: 72px;
+            span {
+                color: $white;
+            }
+        }
+        ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 29px;
+            a {
+                font-family: $menu-font;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: .875rem;
+                line-height: 1.0494rem;
+                color: $white;
+            }
+            a:hover {
+                color: $red;
+            }
+        }
+        p {
+            color: $light-gray;
+            font-family: $menu-font;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 16.79px;
+        }
+    }
+}

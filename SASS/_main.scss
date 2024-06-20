@@ -1,0 +1,368 @@
+body {
+    background-color: $dark-gray;
+    main {
+        text-align: center;
+        .modal {
+            background-color: #000;
+            background-color: rgba(0, 0, 0, 0.4);
+            //display: block pour afficher le modal 
+            display: none;
+            position: fixed;
+            z-index: 11;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin-top: 11px;
+                margin-left: 11px;
+            }
+            .signupBox {
+                margin: 5% auto;
+                height: 608px;
+                width: 410px;
+                padding: 61px;
+                background-color: black;
+                position: relative;
+                text-align: left;
+                .input-flex {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    gap: 25px;
+                    margin-bottom: 22px;
+                    .btnWrapper {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        margin-top: 5px;
+                        margin-bottom: 29px;;
+                        height: 54px;
+                        .left, .right {
+                            font-family: $menu-font;
+                            font-weight: 700;
+                            font-size: 1.5rem;
+                            line-height: 1.8rem;
+                            color: $white;
+                            text-transform: uppercase;
+                        }
+                        .left {
+                            border-top: solid 1px $white;
+                            border-bottom: solid 1px $white;
+                            border-left: solid 1px $white;
+                            padding: 11px 26px 14px 32px;
+                            border-radius: 8px 0px 0px 8px;
+                        }
+                        .right {
+                            border-top: solid 1px $white;
+                            border-bottom: solid 1px $white;
+                            border-right: solid 1px $white;
+                            padding: 11px 45px 14px 32px;
+                            border-radius: 0px 8px 8px 0px;
+                        }
+                        .toggle {
+                            background-color: $red;
+                            border: none;
+                        }
+                    }
+                    input {
+                        margin: 0 auto;
+                        padding: 12.4px 0px 12.4px 20px;
+                        width: 100%;
+                        border-radius: 8px;
+                        border: none;
+                    }
+                }
+                
+                #checkbox {
+                    margin-bottom: 46px;
+                }
+                label {
+                    display: inline;
+                    padding-left: 9px;
+                    color: $white;
+                    font-family: $main-font;
+                }
+                button {
+                    background-color: $red;
+                    display: block;
+                    border: none;
+                    font-family: $menu-font;
+                    font-weight: 700;
+                    font-size: 1.25rem;
+                    line-height: 1.5rem;
+                    color: $white;
+                    text-transform: uppercase;
+                    padding: 11px 115px 12px 115px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    margin-bottom: 30px;
+                }
+                #forgotLink {
+                    display: block;
+                    color: $red;
+                    font-family: $main-font;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 1.21rem;
+                    margin-bottom: 19px;
+                }
+                p {
+                    color: $white;
+                    font-family: $main-font;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 1.21rem;
+                    span {
+                        a {
+                            color: $red;
+                        }
+                    }
+                }
+
+            }
+        }
+        .searchBar {
+                font-size: 0;
+                padding-bottom: 71px;
+            input {
+                color: black;
+                font-size: 1rem;
+                line-height: 19px;
+                font-weight: 400;
+                font-family: $main-font;
+                padding: 13.6px 0px 11.4px 18px;
+                border-radius: 8px 0px 0px 8px;
+                border: none;
+                margin-top: 73px;
+                margin-bottom: 61px;
+            }       
+            button {
+                height: 44px;
+                width: 44px;
+                background-color: $red;
+                border: none;
+                border-radius: 0px 8px 8px 0px;
+            }
+        }
+        section {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            text-align: left;
+            .container {
+                    width: 70vw;
+                    --div-width: 70vw;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 10px;
+                    margin-bottom: 95px;
+                    h2 {
+                        font-family: $main-font;
+                        font-weight: 400;
+                        font-size: 1rem;
+                        line-height: 1.21rem;
+                        color: $white;
+                    }
+                    .swiper-container {
+                        max-width: 66vw;
+                        position: relative;
+                        .swiper1, .swiper2, .swiper3 {
+                        overflow: hidden;
+                        
+                        }
+                        .swiper-slide {
+                            height: auto;
+                            position: relative;
+                            .overlayCard {
+                                background-color: #000;
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                z-index: 200;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                transition: .5s ease;
+                                opacity: 0;
+                                .cardContent {
+                                    padding: 76px 38px 38px 38px;
+                                    font-family: $main-font;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 15px;
+                                    text-align: center;
+                                    h2 {
+                                        font-weight: 700;
+                                        font-size: 1.25rem;
+                                        line-height: 1.5rem;
+                                        color: $white;
+                                    }
+                                    h4 {
+                                        font-weight: 700;
+                                        font-size: 1.25rem;
+                                        line-height: 1.5rem;
+                                        color: #B0B0B0;
+                                    }
+                                    p {
+                                        font-weight: 500;
+                                        font-size: .875rem;
+                                        line-height: 16.49px;
+                                        color: $white;
+                                    }
+                                    h3 {
+                                        font-weight: 700;
+                                        font-size: 2rem;
+                                        line-height: 2.4rem;
+                                        color: $red;
+                                    }
+                                }
+                            }
+                            .overlayCard:hover {
+                                opacity: 0.9;
+                                cursor: pointer;
+                        }
+                        }
+                        .swiper-slide img {
+                            height: 100%;
+                        }
+                        .swiper-button-next::after, .swiper-button-prev::after {
+                            display: none;
+                        }
+                    }
+                    .genreMenu {
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        justify-content: center;
+                        margin: 0 auto;
+                        h2 {
+                            margin-bottom: 46px;
+                        }
+                        ul {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            margin-bottom: 26px;
+                            max-width: calc(var(--div-width) *2.2/3);
+                            li {
+                                font-family: $main-font;
+                                font-weight: 400;
+                                font-size: 1rem;
+                                line-height: 1.21rem;
+                                color: $white;
+                                padding: 7px 10px;
+                            }
+                            .selectedGenre {
+                                background-color: $red;
+                                border-radius: 8px;
+                                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                            }
+                        }
+                        .line {
+                            border: solid 1px white;
+                            margin-bottom: 29px;
+                            max-width: calc(var(--div-width) *2.2/3);
+                        }
+                    }
+                }
+        }
+        .genreSection {
+            margin-bottom: 14px;
+        }
+    }
+}
+
+.overlay {
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.4);
+    //display: block pour afficher le modal 
+    display: none;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.popupMovie {
+    background-color: #000;
+    padding: 74px 79px;
+    margin: 5% auto;
+    max-width: 742px;
+    position: relative;
+    #crossBtn {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-top: 11px;
+        margin-left: 11px;
+    }
+    .popupMovie-flex {
+        display: flex;
+        flex-direction: row;
+        gap: 52px;
+        img {
+            max-width: 234px;
+            border: solid 1px white;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            text-align: left;
+            h3 {
+                color: $red;
+                text-transform: uppercase;
+                font-family: $menu-font;
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+                #star {
+                    border: none;
+                    margin-right: 5px;
+                }
+            }
+            h4 {
+                color: $white;
+                font-family: $menu-font;
+                font-weight: 700;
+                font-size: .875rem;
+                line-height: 1.05rem;
+                margin-bottom: 11px;
+            }
+            .score {
+                font-family: $main-font;
+                margin-bottom: 12px;
+            }
+            h5 {
+                color: $white;
+                font-family: $menu-font;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: .875rem;
+                line-height: 1.05rem;
+                margin-bottom: 13px;
+            }
+            p {
+                font-family: $menu-font;
+                color: $white;
+                font-weight: 300;
+                font-size: 1rem;
+                line-height: 1.5rem;
+                margin-bottom: 10px;
+                span {
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+}

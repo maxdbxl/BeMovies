@@ -1,0 +1,46 @@
+header {
+    background-color: $black;
+    
+    div { display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+
+        h1 {
+            color: $white;
+            text-transform: uppercase;
+            font-family: $menu-font;
+            font-weight: 700;
+            font-size: 2.25rem;
+            line-height: 2.75rem;
+            padding-top: 26px;
+            padding-bottom: 31px;
+            padding-left: 180px;
+
+            span {
+                color: $red;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            gap: 29px;
+            padding-right: 180px;
+
+            a {
+            color: $white;
+            text-transform: uppercase;
+            font-family: $menu-font;
+            font-weight: 700;
+            font-size: .875rem;
+            line-height: 1rem;
+            letter-spacing: 3%;               
+            }
+            a:hover {
+                color: $red;
+            }
+        }
+    }
+}

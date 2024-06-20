@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeMovies</title>
+    <link rel="stylesheet" href="./SASS/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+    <script defer src="./Javascript/app.js"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <h1><span>Be</span>Movies</h1>
+            <ul>
+                <a href="#searchBar">Search</a>
+                <a href="#latest">Latest</a>
+                <a href="#genres">Genres</a>
+                <a href="">Register</a>
+                <a href="">Sign in</a>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div id ="modal" class="modal">
+            <div class="signupBox">
+                <img src="./Assets/Close.svg" alt="">
+                <div class="input-flex">                
+                    <div class="btnWrapper">
+                        <a class="left" href="">Signup</a>
+                        <a class="right toggle" href="">Login</a>
+                    </div>
+                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Password">
+                </div>
+                    <input type="checkbox" id="checkbox"><label for="">Remember me</label>
+                    <button>Login</button>
+                    <a href="" id="forgotLink">I forgot my password</a>
+                    <p>Not a member yet ?<span> <a href="">Sign up</a></span></p> 
+            </div>
+        </div>
+        <div class="overlay">
+            <div class="popupMovie">
+                <img src="./Assets/Close.svg" id="crossBtn" alt="">
+                <div class="popupMovie-flex">
+                    <img src="./Assets/affiche.jpg" alt="">
+                    <div>
+                        <h3>The Godfather</h3>
+                        <h4>1972</h4>
+                        <h3 class="score"><img id="star" src="./Assets/star.svg" alt="">8.7</h3>
+                        <h5>Crime/Drama</h5>
+                        <p>Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.</p>
+                        <p><span>Cast: </span>Marlon Brando, Al Pacino, James Caan, Robert Duvall</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="searchBar" id="searchBar">
+            <input type="text" placeholder="Search">
+            <button><img src="./Assets/Vector.svg" alt=""></button>
+        </div>
+        <section>
+            <div class="container">
+                    <h2>Results for : <span></span></h2>
+                    <!-- Slider main container -->
+                    <div class="swiper-container">
+                    <div class="swiper1">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <!-- Peut être mis dans un template (toute le contenu de la div overlayCard) -->
+                            <div class="overlayCard">
+                                <div class="cardContent">
+                                    <h2>The Godfather part III</h2>
+                                    <h4>1990</h4>
+                                    <p>Crime / Drama / Thriller</p>
+                                    <h3><img src="./Assets/star.svg" alt="">7.4</h3>
+                                </div>
+                            </div>
+                            <img src="./Assets/affiche.jpg" alt="">
+                        </div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        </div>
+                        <!-- If we need navigation buttons -->
+
+                        <!-- If we need scrollbar -->
+                        <!-- <div class="swiper-scrollbar"></div> -->
+                    </div>
+                        <div class="swiper-button-prev swiper-button-prev1"><img  src="./Assets/previous.svg" alt=""></div>
+                        <div class="swiper-button-next swiper-button-next1"><img  src="./Assets/next.svg" alt=""></div>
+                    </div>
+            </div>
+        </section>
+        <section>
+            <div class="container" id="latest">
+                    <h2>Latest releases</h2>
+                    <!-- Slider main container -->
+                    <div class="swiper-container">
+                    <div class="swiper2">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        </div>
+                        <!-- If we need navigation buttons -->
+
+
+                        <!-- If we need scrollbar -->
+                        <!-- <div class="swiper-scrollbar"></div> -->
+                    </div>
+                        <div class="swiper-button-prev swiper-button-prev2"><img  src="./Assets/previous.svg" alt=""></div>
+                        <div class="swiper-button-next swiper-button-next2"><img  src="./Assets/next.svg" alt=""></div>
+                    </div>
+            </div>
+        </section>
+        <section class="genreSection">
+            <div class="container" id="genres">
+                <div class="genreMenu">
+                    <h2>Movies by genre</h2>
+                    <ul>
+                        <li class="selectedGenre">Comedy</li>
+                        <li>Drama</li>
+                        <li>Action</li>
+                        <li>Romance</li>
+                        <li>Fantasy</li>
+                        <li>Animation</li>
+                    </ul>
+                    <div class="line"></div>
+                </div>
+                    <h2>Placeholder</h2>
+                    <!-- Slider main container -->
+                    <div class="swiper-container">
+                    <div class="swiper3">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        <div class="swiper-slide"><img src="./Assets/affiche.jpg" alt=""></div>
+                        </div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev swiper-button-prev3"><img  src="./Assets/previous.svg" alt=""></div>
+                        <div class="swiper-button-next swiper-button-next3"><img  src="./Assets/next.svg" alt=""></div>
+
+                        <!-- If we need scrollbar -->
+                        <!-- <div class="swiper-scrollbar"></div> -->
+                    </div>
+                    </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="foot-container">
+            <h1>Be<span>movies</span></h1>
+            <ul>
+                <a href="#">Search</a>
+                <a href="#">Latest</a>
+                <a href="#">Genres</a>
+                <a href="#">Register</a>
+                <a href="#">Signin</a>
+            </ul>
+            <p>@2023 - All rights reserved</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+</html>

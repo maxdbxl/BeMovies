@@ -16,7 +16,7 @@ const searchSubmitHandler = (event) => {
         resultsSection.style.display = 'none'
         return
     } else {
-        resultFetchData(searchInput.value)
+        resultFetchData(searchInput.value, 1)
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = searchInput.value
@@ -30,6 +30,10 @@ const searchSubmitHandler = (event) => {
 const navigationNextHandler = function (swiper) {}
 
 const navigationPrevHandler = function (swiper) {}
+
+const loadMoreHandler = function (swiper) {
+    console.log('load more pictures from here')
+}
 
 const swiperOnInit = function (event) {
     if (event.el.classList.contains('swiper1')) {
@@ -77,6 +81,7 @@ function SwiperFactory(containerClass, buttonsClass) {
             init: swiperOnInit,
             navigationNext: navigationNextHandler,
             navigationPrev: navigationPrevHandler,
+            reachEnd: loadMoreHandler,
         },
     })
     return swiper
@@ -86,12 +91,12 @@ function updateResultImage(response) {
     resultsImages.forEach((image, index) => {
         image.setAttribute(
             'src',
-            `https://image.tmdb.org/t/p/original/${response.results[index].poster_path}`
+            `https://image.tmdb.org/t/p/original/${response[index].poster_path}`
         )
     })
 }
 //Call Api handler
-function resultFetchData(searchValue) {
+function resultFetchData(searchValue, page) {
     const options = {
         method: 'GET',
         headers: {
@@ -102,11 +107,26 @@ function resultFetchData(searchValue) {
     }
 
     fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+            searchValue
+        )}&include_adult=false&language=en-US&page=${page}`,
         options
     )
         .then((response) => response.json())
-        .then((response) => updateResultImage(response))
+        .then((response) => {
+            const filtered_response = response.results.filter((movie) => {
+                if (movie.hasOwnProperty('poster_path')) {
+                    // Now check for non-empty string and not null/undefined
+                    return (
+                        movie.poster_path !== null && movie.poster_path !== ''
+                    )
+                }
+                // If the field doesn't exist, automatically exclude the movie
+                return false
+            })
+
+            updateResultImage(filtered_response)
+        })
         .catch((err) => console.error(err))
 }
 

@@ -7,6 +7,12 @@ const resultsImages = document.querySelectorAll('.resultimages')
 
 resultsSection.style.display = 'none'
 //User interface events handler
+let resultsPagination = {
+    totalPage: 0,
+    actualPage: 0,
+    totalCount: 0,
+    lastSearchInput: '',
+}
 
 const searchSubmitHandler = (event) => {
     event.preventDefault()
@@ -17,9 +23,11 @@ const searchSubmitHandler = (event) => {
         return
     } else {
         resultFetchData(searchInput.value, 1)
+
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = searchInput.value
+
     searchInput.value = ''
 
     //if results existes display block the results section
@@ -33,6 +41,16 @@ const navigationPrevHandler = function (swiper) {}
 
 const loadMoreHandler = function (swiper) {
     console.log('load more pictures from here')
+    resultsPagination.actualPage++
+    console.log(resultsPagination)
+    if (resultsPagination.actualPage > resultsPagination.totalPage)
+        console.log('No mores pages to load')
+    else {
+        resultFetchData(
+            resultsPagination.lastSearchInput,
+            resultsPagination.actualPage
+        )
+    }
 }
 
 const swiperOnInit = function (event) {
@@ -52,7 +70,7 @@ function SwiperFactory(containerClass, buttonsClass) {
     const swiper = new Swiper(containerClass, {
         // Optional parameters
         direction: 'horizontal',
-        loop: true,
+        loop: false,
         slidesPerView: 1,
         spaceBetween: 20,
         slidesPerGroup: 1,
@@ -87,13 +105,24 @@ function SwiperFactory(containerClass, buttonsClass) {
     return swiper
 }
 
-function updateResultImage(response) {
-    resultsImages.forEach((image, index) => {
-        image.setAttribute(
-            'src',
-            `https://image.tmdb.org/t/p/original/${response[index].poster_path}`
-        )
-    })
+function initResultImage(results) {
+    console.log(results.length)
+    for (let index = 0; index < results.length; index++) {
+        const slide = `<div class="swiper-slide"><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/> <div class="swiper-lazy-preloader"></div></div>`
+        if (index < 4) swiper1.removeSlide(0)
+        swiper1.appendSlide(slide)
+        swiper1.update()
+    }
+}
+
+function updateResultImage(results) {
+    console.log(results.length)
+    for (let index = 0; index < results.length; index++) {
+        const slide = `<div class="swiper-slide"><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/> <div class="swiper-lazy-preloader"></div></div>`
+
+        swiper1.appendSlide(slide)
+        swiper1.update()
+    }
 }
 //Call Api handler
 function resultFetchData(searchValue, page) {
@@ -125,7 +154,21 @@ function resultFetchData(searchValue, page) {
                 return false
             })
 
-            updateResultImage(filtered_response)
+            resultsPagination.totalPage = response.total_pages
+            resultsPagination.lastSearchInput = searchValue
+            resultsPagination.actualPage = page
+            resultsPagination.totalCount = response.total_results
+            if (page == 1) {
+                console.log(
+                    'first time loading images for the same search input'
+                )
+                initResultImage(filtered_response)
+            } else {
+                console.log(
+                    'updating and loading more images after reaching end of swiper'
+                )
+                updateResultImage(filtered_response)
+            }
         })
         .catch((err) => console.error(err))
 }

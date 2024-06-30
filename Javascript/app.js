@@ -6,7 +6,7 @@ const resultSpan = document.querySelector('h2 span')
 const resultsImages = document.querySelectorAll('.resultimages')
 
 resultsSection.style.display = 'none'
-//User interface events handler
+//State management for pagination
 let resultsPagination = {
     totalPage: 0,
     actualPage: 0,
@@ -14,8 +14,9 @@ let resultsPagination = {
     lastSearchInput: '',
 }
 
-const searchSubmitHandler = (event) => {
+const searchSubmitHandler = async (event) => {
     event.preventDefault()
+    let totalResults = 0
     //call api here to find results related to a movie
 
     if (!searchInput.value.trim()) {
@@ -24,12 +25,11 @@ const searchSubmitHandler = (event) => {
     } else {
         console.log('searching for ' + searchInput.value)
         // resultsPagination.totalCount = 0
-        resultFetchData(searchInput.value, 1)
+        totalResults = await resultFetchData(searchInput.value, 1)
 
         resultsSection.style.display = 'flex'
     }
-    resultSpan.textContent = searchInput.value
-
+    resultSpan.textContent = `${searchInput.value} - total : ${totalResults}`
     searchInput.value = ''
 
     //if results existes display block the results section
@@ -41,13 +41,9 @@ const loadMoreHandler = function (swiper) {
     console.log('load more pictures from here  :')
     resultsPagination.actualPage++
 
-    if (resultsPagination.actualPage > resultsPagination.totalPage)
-        console.log('No mores pages to load')
+    if (resultsPagination.actualPage > resultsPagination.totalPage) console.log('No mores pages to load')
     else {
-        resultFetchData(
-            resultsPagination.lastSearchInput,
-            resultsPagination.actualPage
-        )
+        resultFetchData(resultsPagination.lastSearchInput, resultsPagination.actualPage)
     }
 }
 
@@ -114,9 +110,7 @@ function initResultImage(results) {
     swiper1.on('reachEnd', loadMoreHandler)
     resultsPagination.totalCount = 0
     resultsPagination.totalCount += results.length
-    console.log(
-        `totalCount of firstPage equal to ${resultsPagination.totalCount}`
-    )
+    console.log(`totalCount of firstPage equal to ${resultsPagination.totalCount}`)
 }
 
 function updateResultImage(results) {
@@ -142,9 +136,7 @@ async function resultFetchData(searchValue, page) {
 
     try {
         const response = await fetch(
-            `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-                searchValue
-            )}&include_adult=false&language=en-US&page=${page}`,
+            `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchValue)}&include_adult=false&language=en-US&page=${page}`,
             options
         )
 
@@ -159,28 +151,21 @@ async function resultFetchData(searchValue, page) {
         })
 
         resultsPagination.totalPage = responseJson.total_pages
-        console.log(
-            `total number of pages is equal to ${responseJson.total_pages}`
-        )
+        console.log(`total number of pages is equal to ${responseJson.total_pages}`)
         resultsPagination.actualPage = page
 
         if (page === 1) {
-            console.log(
-                'first time loading images for the this search input ' +
-                    searchValue
-            )
+            console.log('first time loading images for the this search input ' + searchValue)
             console.log(filtered_response)
             initResultImage(filtered_response)
         } else {
-            console.log(
-                'updating and loading more images after reaching end of swiper , page : ' +
-                    page
-            )
+            console.log('updating and loading more images after reaching end of swiper , page : ' + page)
             updateResultImage(filtered_response)
         }
         resultsPagination.lastSearchInput = searchValue
 
         console.log(JSON.stringify(resultsPagination))
+        return responseJson.total_results
     } catch (err) {
         console.error(err)
     }

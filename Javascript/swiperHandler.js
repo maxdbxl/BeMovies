@@ -82,7 +82,7 @@ export const loadMoreHandler = function (swiper) {
             )
         }
     }
-    if (swiper.el.classList.contains('swiper1')) {
+    if (swiper.el.classList.contains('swiper3')) {
         latestPagination.actualPage++
         if (resultsPagination.actualPage > latestPagination.totalPage) console.log('No mores pages to load for genre swiper')
         else {

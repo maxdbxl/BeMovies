@@ -7,6 +7,7 @@ const searchButton = searchBar.querySelector('button')
 const resultsSection = document.getElementById('hidden')
 const resultSpan = document.querySelector('#resultSubtitle span')
 const latestSpan = document.querySelector('#latestSubtitle span')
+const genreSpan = document.querySelector('#genreSubtitle span')
 
 const genreListItems = document.querySelectorAll('.genreListItem')
 const activeGenreItem = document.querySelector('.selectedGenre')
@@ -58,7 +59,7 @@ const genreListTotalResults = await fetchData(getDynamicUrl('GET_GENRES_IDS', {}
 //'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
 //https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=0&sort_by=popularity.desc&with_genres=35
 const genreTotalResults = await fetchData(getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1 }), swiper3)
-
+genreSpan.textContent = `Comedy`
 genreListItems.forEach(function (item) {
     item.addEventListener('click', async function () {
         genreListItems.forEach(function (item) {
@@ -67,5 +68,6 @@ genreListItems.forEach(function (item) {
         item.classList.add('selectedGenre')
 
         const genreTotalResults = await fetchData(getDynamicUrl('SEARCH_MOVIES_BY_GENRE', { page: 1, with_genres: item.dataset.genreid }), swiper3)
+        genreSpan.textContent = `${item.textContent} - Total ${genreTotalResults} results`
     })
 })

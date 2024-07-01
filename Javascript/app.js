@@ -1,4 +1,4 @@
-import { resultFetchData } from './apiHandler.js'
+import { fetchData, getDynamicUrl, resultsPagination } from './apiHandler.js'
 import { SwiperFactory } from './swiperHandler.js'
 
 const searchBar = document.getElementById('searchBar')
@@ -21,8 +21,14 @@ const searchSubmitHandler = async (event) => {
     } else {
         console.log('searching for ' + searchInput.value)
         // resultsPagination.totalCount = 0
-        totalResults = await resultFetchData(searchInput.value, 1, swiper1)
-
+        totalResults = await fetchData(
+            getDynamicUrl('SEARCH_MOVIES_BY_NAME', {
+                query: encodeURIComponent(searchInput.value),
+                page: 1,
+            }),
+            swiper1
+        )
+        resultsPagination.lastSearchInput = searchInput.value
         resultsSection.style.display = 'flex'
     }
     resultSpan.textContent = `${searchInput.value} - total : ${totalResults}`

@@ -1,4 +1,4 @@
-import { initResultImage, updateResultImage } from './swiperHandler.js'
+import { initSlides, updateSlides } from './swiperHandler.js'
 
 //State management for pagination
 export let resultsPagination = {
@@ -7,8 +7,62 @@ export let resultsPagination = {
     totalCount: 4,
     lastSearchInput: '',
 }
+export let latestPagination = {
+    totalPage: 0,
+    actualPage: 0,
+    totalCount: 4,
+    lastSearchInput: '',
+}
+export let genrePagination = {
+    totalPage: 0,
+    actualPage: 0,
+    totalCount: 4,
+    lastSearchInput: '',
+}
 
-export async function resultFetchData(searchValue, page, swiper) {
+export const API_CONFIG = {
+    SEARCH_MOVIES_BY_NAME: {
+        endpoint: 'search/movie',
+        params: {
+            query: '',
+            page: 0,
+            include_adult: false,
+            language: 'en-US',
+        },
+    },
+    GET_LATEST_MOVIES: {
+        endpoint: 'movie/latest',
+        params: {},
+    },
+
+    SEARCH_MOVIES_BY_GENRE: {
+        endpoint: 'movie/latest',
+        params: {},
+    },
+}
+
+export function getDynamicUrl(action, userParams = {}) {
+    // Validate action
+    console.log(JSON.stringify(action))
+    if (!Object.keys(API_CONFIG).includes(action)) {
+        throw new Error(`Invalid action: ${action}`)
+    }
+
+    const baseUrl = 'https://api.themoviedb.org/3/'
+
+    // Get the configuration for the specified action
+    const actionConfig = API_CONFIG[action]
+
+    const params = { ...actionConfig.params, ...userParams }
+
+    // Construct URL with query parameters
+    let url = new URL(`${baseUrl}${actionConfig.endpoint}`)
+    url.search = new URLSearchParams(params).toString() // Handle encoding automatically
+    console.log(url.toString())
+    return url.toString()
+}
+
+export async function fetchData(requestURL, swiper) {
     const options = {
         method: 'GET',
         headers: {
@@ -19,10 +73,9 @@ export async function resultFetchData(searchValue, page, swiper) {
     }
 
     try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchValue)}&include_adult=false&language=en-US&page=${page}`,
-            options
-        )
+        const response = await fetch(requestURL, options)
+        //`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchValue)}&include_adult=false&language=en-US&page=${page}`
+        // "https://api.themoviedb.org/3/search/movie?searchValue=test&page=1&include_adult=false&language=en-US"
 
         const responseJson = await response.json()
 
@@ -34,21 +87,31 @@ export async function resultFetchData(searchValue, page, swiper) {
             return false
         })
 
-        resultsPagination.totalPage = responseJson.total_pages
-        console.log(`total number of pages is equal to ${responseJson.total_pages}`)
-        resultsPagination.actualPage = page
-
-        if (page === 1) {
-            console.log('first time loading images for the this search input ' + searchValue)
-            console.log(filtered_response)
-            initResultImage(filtered_response, swiper)
-        } else {
-            console.log('updating and loading more images after reaching end of swiper , page : ' + page)
-            updateResultImage(filtered_response, swiper)
+        //pagination handling
+        if (swiper.el.classList.contains('swiper1')) {
+            resultsPagination.totalPage = responseJson.total_pages
+            console.log(`result total number of pages is equal to ${responseJson.total_pages}`)
+            resultsPagination.actualPage = responseJson.page
+        } else if (swiper.el.classList.contains('swiper2')) {
+            latestPagination.totalPage = responseJson.total_pages
+            console.log(`latest total number of pages is equal to ${responseJson.total_pages}`)
+            latestPagination.actualPage = responseJson.page
+        } else if (swiper.el.classList.contains('swiper3')) {
+            genrePagination.totalPage = responseJson.total_pages
+            console.log(`genre total number of pages is equal to ${responseJson.total_pages}`)
+            genrePagination.actualPage = responseJson.page
         }
-        resultsPagination.lastSearchInput = searchValue
 
-        console.log(JSON.stringify(resultsPagination))
+        //initializing or updating slides
+        if (responseJson.page === 1) {
+            console.log('first time loading images for the this query ')
+            console.log(filtered_response)
+            initSlides(filtered_response, swiper)
+        } else {
+            console.log('updating and loading more images after reaching end of swiper , page : ' + responseJson.page)
+            updateSlides(filtered_response, swiper)
+        }
+
         return responseJson.total_results
     } catch (err) {
         console.error(err)

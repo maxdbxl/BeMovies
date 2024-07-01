@@ -1,5 +1,36 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
+import { resultsPagination, resultFetchData } from './apiHandler.js'
+
+//Swiper slides manipulation
+
+export function initResultImage(results, swiper) {
+    swiper.slideTo(0, 1, false)
+    swiper.off('reachEnd', loadMoreHandler)
+    swiper.removeAllSlides()
+    for (let index = 0; index < results.length; index++) {
+        console.log(`creating ${results.length} new slide : `)
+        const slide = `<div class="swiper-slide"><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
+
+        swiper.appendSlide(slide)
+        swiper.update()
+    }
+    swiper.on('reachEnd', loadMoreHandler)
+    resultsPagination.totalCount = 0
+    resultsPagination.totalCount += results.length
+    console.log(`totalCount of firstPage equal to ${resultsPagination.totalCount}`)
+}
+
+export function updateResultImage(results, swiper) {
+    console.log(`swiper UPDATE with ${results.length} images`)
+    for (let index = 0; index < results.length; index++) {
+        const slide = `<div class="swiper-slide"><img class="resultimages" src="https://image.tmdb.org/t/p/original/${results[index].poster_path}" loading="lazy" alt=""/>   <div class="swiper-lazy-preloader"></div> </div>`
+
+        swiper.appendSlide(slide)
+    }
+    resultsPagination.totalCount += results.length
+    console.log(`totalCount now equal to ${resultsPagination.totalCount}`)
+}
 //Swiper events handler
 
 export const loadMoreHandler = function (swiper) {
@@ -8,7 +39,7 @@ export const loadMoreHandler = function (swiper) {
 
     if (resultsPagination.actualPage > resultsPagination.totalPage) console.log('No mores pages to load')
     else {
-        resultFetchData(resultsPagination.lastSearchInput, resultsPagination.actualPage)
+        resultFetchData(resultsPagination.lastSearchInput, resultsPagination.actualPage, swiper)
     }
 }
 

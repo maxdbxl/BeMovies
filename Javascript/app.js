@@ -5,7 +5,9 @@ const searchBar = document.getElementById('searchBar')
 const searchInput = searchBar.querySelector('input[type="text"]')
 const searchButton = searchBar.querySelector('button')
 const resultsSection = document.getElementById('hidden')
-const resultSpan = document.querySelector('h2 span')
+const resultSpan = document.querySelector('#resultSubtitle span')
+const latestSpan = document.querySelector('#latestSubtitle span')
+
 //const resultsImages = document.querySelectorAll('.resultimages')
 
 resultsSection.style.display = 'none'
@@ -42,3 +44,8 @@ searchButton.addEventListener('click', searchSubmitHandler)
 const swiper1 = SwiperFactory('.swiper1', '1')
 const swiper2 = SwiperFactory('.swiper2', '2')
 const swiper3 = SwiperFactory('.swiper3', '3')
+
+//load latest swiper
+
+const latestTotalResults = await fetchData(getDynamicUrl('GET_LATEST_MOVIES', { page: 1 }), swiper2)
+latestSpan.textContent = `total : ${latestTotalResults}`

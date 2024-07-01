@@ -24,7 +24,7 @@ export function initSlides(results, swiper) {
     } else if (swiper.el.classList.contains('swiper2')) {
         latestPagination.totalCount = 0
         latestPagination.totalCount += results.length
-        console.log(`totalCount of firstPage equal to ${latestPPagination.totalCount}`)
+        console.log(`totalCount of firstPage equal to ${latestPagination.totalCount}`)
     } else if (swiper.el.classList.contains('swiper3')) {
         genrePagination.totalCount = 0
         genrePagination.totalCount += results.length

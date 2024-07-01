@@ -30,9 +30,17 @@ export const API_CONFIG = {
             language: 'en-US',
         },
     },
+    //typical url : https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.lte=2024-07-01&sort_by=primary_release_date.desc
+    //              https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=1&primary_release_date_lte=2024-07-01&sort_by=primary_release_date.desc
     GET_LATEST_MOVIES: {
-        endpoint: 'movie/latest',
-        params: {},
+        endpoint: 'discover/movie',
+        params: {
+            include_adult: false,
+            language: 'en-US',
+            page: 0,
+            'primary_release_date.lte': new Date().toISOString().slice(0, 10),
+            sort_by: 'primary_release_date.desc',
+        },
     },
 
     SEARCH_MOVIES_BY_GENRE: {

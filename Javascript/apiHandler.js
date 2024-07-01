@@ -1,5 +1,6 @@
 import { initSlides, updateSlides } from './swiperHandler.js'
-
+const genreListItems = document.querySelectorAll('.genreListItem')
+const activeGenreItem = document.querySelector('.selectedGenre')
 //State management for pagination
 export let resultsPagination = {
     totalPage: 0,
@@ -42,10 +43,21 @@ export const API_CONFIG = {
             sort_by: 'primary_release_date.desc',
         },
     },
-
+    GET_GENRES_IDS: {
+        endpoint: 'genre/movie/list',
+        params: { language: 'en' },
+    },
+    //'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=28'
     SEARCH_MOVIES_BY_GENRE: {
-        endpoint: 'movie/latest',
-        params: {},
+        endpoint: 'discover/movie',
+        params: {
+            include_adult: false,
+            include_video: false,
+            language: 'en-US',
+            page: 0,
+            sort_by: 'popularity.desc',
+            with_genres: 35,
+        },
     },
 }
 
@@ -86,7 +98,13 @@ export async function fetchData(requestURL, swiper) {
         // "https://api.themoviedb.org/3/search/movie?searchValue=test&page=1&include_adult=false&language=en-US"
 
         const responseJson = await response.json()
+        //case were the request is not related to a swiper
+        if (swiper === 'GET_GENRES_IDS') {
+            // in this case we need to store genre liste
 
+            updateDataSetGenreIds(responseJson)
+            return responseJson.total_results
+        }
         const filtered_response = responseJson.results.filter((movie) => {
             if (movie.hasOwnProperty('poster_path')) {
                 return movie.poster_path !== null && movie.poster_path !== ''
@@ -124,4 +142,16 @@ export async function fetchData(requestURL, swiper) {
     } catch (err) {
         console.error(err)
     }
+}
+
+function updateDataSetGenreIds(response) {
+    genreListItems.forEach(function (item) {
+        response.genres.forEach((genre) => {
+            console.log(item.textContent)
+            if (item.textContent === genre.name) {
+                item.dataset.genreid = genre.id
+                console.log(`creating dataset id ${item.dataset.genreid} for genre ${item.textContent}`)
+            }
+        })
+    })
 }
